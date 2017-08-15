@@ -85,7 +85,7 @@ public static async Task Run(CloudBlockBlob myBlob, CloudTable checkpointTable, 
                     Length = currentChunkSize,
                     LastBlockName = currentChunkLastBlockName,
                     Start = currentStartingByteOffset,
-                    BlobAccountConnectionName = "AzureWebJobsStorage"
+                    BlobAccountConnectionName = "o"
                 });
                 currentStartingByteOffset += currentChunkSize; // the next chunk starts at this offset
                 currentChunkSize = 0;
