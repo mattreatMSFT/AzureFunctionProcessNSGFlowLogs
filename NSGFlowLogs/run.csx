@@ -50,12 +50,12 @@ public static async Task Run(CloudBlockBlob myBlob, CloudTable checkpointTable, 
     bool foundStartingOffset = false;
     bool tieOffChunk = false;
     string msg;
-    //msg = string.Format("Current checkpoint last block name: {0}", checkpoint.LastBlockName);
-    //log.Info(msg);
+    msg = string.Format("Current checkpoint last block name: {0}", checkpoint.LastBlockName);
+    log.Info(msg);
     foreach (var blockListItem in myBlob.DownloadBlockList(BlockListingFilter.Committed))
     {
-        //msg = string.Format("Block name: {0}, length: {1}", blockListItem.Name, blockListItem.Length);
-        //log.Info(msg);
+        msg = string.Format("Block name: {0}, length: {1}", blockListItem.Name, blockListItem.Length);
+        log.Info(msg);
 
         // skip first block, but add to the offset
         // find the starting block based on checkpoint LastBlockName
@@ -137,13 +137,13 @@ public static async Task Run(CloudBlockBlob myBlob, CloudTable checkpointTable, 
     }
 
     // debug logging
-    //msg = string.Format("Chunks to download & transmit: {0}", chunks.Count);
-    //log.Info(msg);
-    //foreach (var chunk in chunks)
-    //{
-    //    msg = string.Format("Starting byte offset: {0}, size of chunk: {1}, name of last block: {2}", chunk.Start, chunk.Length, chunk.LastBlockName);
-    //    log.Info(msg);
-    //}
+    msg = string.Format("Chunks to download & transmit: {0}", chunks.Count);
+    log.Info(msg);
+    foreach (var chunk in chunks)
+    {
+        msg = string.Format("Starting byte offset: {0}, size of chunk: {1}, name of last block: {2}", chunk.Start, chunk.Length, chunk.LastBlockName);
+        log.Info(msg);
+    }
 
     // update the checkpoint
     if (chunks.Count > 0)
